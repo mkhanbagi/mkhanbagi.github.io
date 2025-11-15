@@ -158,15 +158,24 @@ html, body {
     --label-y: 44%;
   }
 
-  .lobe.pubs::before {
+  .lobe.pubs::before{
     content: "";
     position: absolute;
-    width: calc(1.5* var(--about-width));
+    width: calc(1.2*var(--pubs-width));
+    height: 70%;
+    left: 15%;
+    pointer-events: auto;
+  }
+
+  .lobe.pubs::after {
+    content: "";
+    position: absolute;
+    width: calc(.95* var(--about-width));
     height: 100%;
-    top: -10%;              /* extend a bit above */
-    bottom: 12%;           /* and below, optional */
-    left: 28%;             /* start exactly at the right edge */
-    pointer-events: auto;   
+    top: -12%;              /* extend a bit above */
+    bottom: 2%;           /* and below, optional */
+    left: 55%;             /* start exactly at the right edge */
+    pointer-events: auto;  
   }
   
   .lobe.contact {
