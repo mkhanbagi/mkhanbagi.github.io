@@ -300,6 +300,12 @@ html, body {
     display: block;
   }
   
+  .banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
   .intro-text {
     position: absolute;
     top: 3%;
@@ -350,26 +356,6 @@ html, body {
     position: relative;
     z-index: 1;
   }
-/* === About page: responsive layout for illustration + story === */
-@media (max-width: 900px) {
-  .about-block {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .pearl-girl {
-    position: static;
-    height: auto;
-    max-width: 70%;
-    margin: 1.5rem auto 0.75rem;
-    z-index: 10;
-  }
-
-  .story {
-    width: 100%;
-    margin: 1.5rem 1.25rem 1.75rem;
-  }
-}
 
 
   .story p{
@@ -381,21 +367,6 @@ html, body {
   .story p a{
     color: #B3B47F;
   }
-
-
-  /* mobile: move text below image if it gets too tight */
-  @media (max-width: 800px) {
-    .intro-text {
-      position: static;
-      width: 100%;
-      margin-top: 1.5rem;
-      color: #222;
-      background: rgba(0, 0, 0, 0.05);  /* optional subtle card */
-      padding: 1.25rem 1.5rem;
-      border-radius: 12px;
-    }
-  }
-  
   
   /* image containing the full road + logos + timeline */
   .road {
@@ -785,5 +756,72 @@ html, body {
   .lobe.about span,
   .lobe.gallery span {
     font-size: clamp(16px, 4.8vw, 22px);
+  }
+}
+
+/* === About page: responsive layout for illustration + story (MOBILE) === */
+@media (max-width: 900px) {
+  .about-block {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1.5rem 1.25rem 2rem;
+  }
+
+  .pearl-girl {
+    position: static;          /* no absolute positioning */
+    left: auto;
+    bottom: auto;
+    height: auto;
+    max-width: 70%;            /* adjust: 60–80% if you like */
+    margin: 1.5rem auto 0.75rem;
+    z-index: 10;
+  }
+
+  .story {
+    width: 100%;
+    margin: 0;
+    margin-top: 0.5rem;
+  }
+}
+
+/* ===== Top banner + intro text on MOBILE ===== */
+@media (max-width: 800px) {
+
+  /* Stack the band content vertically */
+  .intro-band {
+    display: block;
+    width: 100%;
+  }
+
+  .intro-band-inner {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Banner: just a simple full-width image */
+  .banner {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Text card goes BELOW the banner, full-width */
+  .intro-text {
+    position: static;              /* no absolute overlay */
+    width: 100%;
+    max-width: 100%;
+    margin: 1.25rem auto 1.5rem;
+    padding: 1.25rem 1.5rem;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 12px;
+    border-left: 4px solid var(--accent);
+    color: #222;                   /* dark text for readability */
+    box-shadow: var(--shadow-soft);
+  }
+
+  .intro-text p {
+    max-width: none;               /* don’t constrain paragraphs */
+    text-align: left;              /* a bit nicer on tiny screens */
   }
 }

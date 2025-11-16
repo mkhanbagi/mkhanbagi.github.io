@@ -24,8 +24,17 @@
           </a>
           <section class="intro-band">
             <div class="intro-band-inner">
-              <img class="banner" src="images/banner.png" alt="">
-                <!-- the intro text that sits on the arc -->
+              
+              <!-- <img class="banner" src="images/banner.png" alt=""> -->
+              <picture class="banner">
+              <!-- Image used on small screens -->
+                <source srcset="images/banner-mobile.png" media="(max-width: 800px)" />
+
+              <!-- Default / larger screens -->
+                  <img src="images/banner.png" alt="" />
+              </picture>
+
+              <!-- the intro text that sits on the arc -->
               <section class="intro-text">
                 <p>Every embyro begins as a single cell, but over weeks of Development, 
                   that cell divides, folds and self-assembles into layers, tissues, and organs — most remarkably, a <i>thinking organ</i>! 
