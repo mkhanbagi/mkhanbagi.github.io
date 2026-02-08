@@ -11,6 +11,11 @@
   --accent: #b48c6e;
   --text-main: #222222;
   --text-soft: #666666;
+  --about-link: #B3B47F;
+  --about-link-mobile: #941751;
+  
+
+
   --radius-card: 18px;
   --shadow-soft: 0 10px 32px rgba(0, 0, 0, 0.16);
   --max-width: 1180px;
@@ -314,7 +319,7 @@ body {
 }
 
 .intro-text p a {
-  color: #B3B47F;
+  color: var(--about-link);
   text-decoration: underline;
 }
 
@@ -445,7 +450,7 @@ body {
 }
 
 .about-block .story a {
-  color: #B3B47F;
+  color: var(--about-link);
 }
 
 /* Right: road card */
@@ -666,6 +671,11 @@ footer {
 
 /* optional: slightly smaller on phones */
 @media (max-width: 800px) {
+  :root {
+    --content-link: var(--content-link-mobile);
+    --footer-link: var(--footer-link-mobile);
+  }
+  
   .brain-home-button-left {
     top: 14px;
     left: 14px;
