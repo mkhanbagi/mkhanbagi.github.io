@@ -1,0 +1,236 @@
+:root {
+  --bg: #D9CEAC;
+  --ink: #222222;
+  --name-color: #5E5E8E;
+
+  --shadow-soft: 0 10px 32px rgba(0,0,0,0.16);
+
+  /* One size drives ALL hex tiles */
+  --hex-size: clamp(160px, 18vw, 290px);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  background: #9b8a6d;
+  color: var(--ink);
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow: hidden;
+}
+
+
+/* ===== brain home button (top-left) ===== */
+.brain-home-button-left{
+  position: absolute;
+  top: clamp(14px, 3vmin, 28px);
+  left: clamp(14px, 3vmin, 28px);
+  width: clamp(42px, 7vw, 96px);
+  height: auto;
+  display: block;
+  z-index: 60;
+  cursor: pointer;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,.25));
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.brain-home-button-left:hover{
+  transform: scale(1.12); /* gentler than 1.5 */
+}
+
+.wrap {
+  position: relative;
+  min-height: 100%;
+  background: var(--bg);
+  padding: clamp(18px, 3vmin, 40px);
+}
+
+/* ===== 65% / 35% layout ===== */
+.layout{
+  min-height: calc(100vh - 2 * clamp(18px, 3vmin, 40px));
+  display: grid;
+  grid-template-columns: 65fr 35fr;
+  gap: clamp(16px, 2.5vw, 36px);
+  align-items: center;
+}
+
+/* Left side centers the Honeycomb box */
+.leftPane{
+  display: grid;
+  place-items: center;
+}
+
+/* Right side shows the pearl image */
+.rightPane{
+  display: grid;
+  place-items: center;
+  padding-right: clamp(0px, 1vw, 12px);
+}
+
+.pearl{
+  width: 100%;
+  max-width: 600px;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,.25));
+}
+
+/* ===== Stage / Honeycomb box ===== */
+.stage {
+  position: relative;
+  width: min(100%, 980px);
+  aspect-ratio: 16/9;
+}
+
+.Honeycomb {
+  position: absolute;
+  inset: 0;
+}
+
+/* ===== Hex tiles (ALL SAME SIZE) =====
+   Use center coordinates instead of top-left offsets:
+   left/top = center position, then translate(-50%,-50%)
+*/
+.hex{
+  position: absolute;
+  left: calc(var(--x) * 1%);
+  top:  calc(var(--y) * 1%);
+  width: var(--hex-size);
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  transition: transform .2s ease, filter .2s ease;
+  outline: none;
+  z-index: var(--z, 1);
+  display: inline-block;
+}
+
+
+.hex img{
+  display: block;
+  width: 90%;
+  height: auto;
+  pointer-events: none;
+  background: var(--shadow-soft);
+}
+
+
+/* labels */
+.hex span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-size: clamp(22px, 2.2vw, 35px);
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+  text-align: left;
+  color: #fff;
+  white-space: nowrap;
+  text-shadow:
+  0 3px 0 rgba(0,0,0,0.14),
+    0 10px 22px rgba(0,0,0,0.22);
+  pointer-events: none;
+}
+
+
+  /* soft “lift” + depth
+    0 0 4px rgba(66,66,66,.65),
+    0 1px 3px rgba(66,66,66,.55); */
+#substack-link{
+  font-size: clamp(16px, 1.6vw, 25px);
+}
+
+/* hover/focus */
+.hex:hover,
+.hex:focus-visible {
+  transform: translate(-50%, -50%) scale(1.05);
+  filter: drop-shadow(6px 6px 5px rgba(0, 0, 0, .50));
+}
+
+/* ===== Positions (tune these if you want) =====
+   These are “honeycomb-ish” coordinates similar to your mock.
+*/
+.hex.creative-exp-txt  { --x: 45; --y: 8; --z: 2; }
+.hex.creative-exp-img  { --x: 75; --y: 8; --z: 2; }
+.hex.baking-repo-txt   { --x: 30; --y: 53; --z: 2; }
+.hex.writing-txt       { --x: 60; --y: 53; --z: 3; }
+.hex.baking-repo-img   { --x: 90; --y: 53; --z: 1; }
+.hex.photobooth-txt    { --x: 45; --y: 98; --z: 1; }
+.hex.photobooth-img    { --x: 75; --y: 98; --z: 3; }
+
+
+/* 3) MOBILE: turn the absolute “artboard” honeycomb into a normal layout */
+@media (max-width: 900px){
+
+  /* keep your stacked layout */
+  .layout{
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  /* give breathing room so the home button doesn’t cover the first tile */
+  .wrap{
+    padding-top: calc(clamp(18px, 3vmin, 40px) + 56px);
+  }
+
+  /* remove fixed 16/9 artboard behavior */
+  .stage{
+    width: 100%;
+    aspect-ratio: auto;
+    height: auto;
+  }
+
+  /* Honeycomb becomes a grid container */
+  .Honeycomb{
+    position: relative;   /* override absolute */
+    inset: auto;          /* override inset:0 */
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-flow: row dense;
+    gap: clamp(12px, 3vw, 18px);
+    justify-items: center;
+    align-items: center;
+    padding: 12px 0 6px;
+  }
+
+  /* Hex tiles become normal grid items */
+  .hex{
+    position: relative;   /* override absolute */
+    left: auto; top: auto;
+    transform: none;
+    width: var(--hex-size);
+    max-width: 260px;
+    z-index: 1;
+  }
+
+  .hex img{
+    width: 100%;          /* nicer in grid than 90% */
+    height: auto;
+  }
+
+  /* allow labels to wrap on small screens */
+  .hex span{
+    white-space: normal;
+    text-align: center;
+    max-width: 90%;
+  }
+
+  /* Make Substack tile full-width for a clean final row */
+  .hex.writing-txt{ grid-column: 1 / -1; }
+
+  /* Keep photobooth pair visually consistent (dense will backfill the left cell) */
+  .hex.photobooth-img{ grid-column: 2; }
+  .hex.photobooth-txt{ grid-column: 1; }
+
+  /* (Touch) optional: don’t “zoom” tiles on hover-sized screens */
+  .hex:hover{
+    transform: none;
+    filter: none;
+  }
+}
+
+/* 4) Even smaller phones */
+@media (max-width: 520px){
+  :root{ --hex-size: clamp(120px, 44vw, 190px); }
+  .pearl{ max-height: 38vh; }
+}
