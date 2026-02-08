@@ -69,7 +69,7 @@ html, body {
 
 .pearl{
   width: 100%;
-  max-width: 600px;
+  max-width: 650px;
   object-fit: contain;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,.25));
 }
@@ -139,6 +139,15 @@ html, body {
 #substack-link{
   font-size: clamp(16px, 1.6vw, 25px);
 }
+
+.hex.creative-exp-txt span {
+  left: 45%;
+}
+
+.hex.writing-txt span {
+  left: 45%;
+}
+
 
 /* hover/focus */
 .hex:hover,
