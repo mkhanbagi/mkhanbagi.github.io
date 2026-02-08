@@ -175,6 +175,7 @@ html, body {
 
   /* keep your stacked layout */
   .layout{
+    align-items: start;
     grid-template-columns: 1fr;
     gap: 18px;
   }
