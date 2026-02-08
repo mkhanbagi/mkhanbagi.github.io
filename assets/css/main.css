@@ -671,9 +671,6 @@ footer {
 
 /* optional: slightly smaller on phones */
 @media (max-width: 800px) {
-  :root {
-    --about-link: var(--about-link-mobile);
-  }
   
   .brain-home-button-left {
     top: 14px;
@@ -912,4 +909,9 @@ footer {
     max-width: none;
     text-align: left;
   }
+
+  .intro-text p a {
+   --about-link: var(--about-link-mobile);
 }
+}
+
