@@ -244,5 +244,5 @@ html, body {
 /* 4) Even smaller phones */
 @media (max-width: 520px){
   :root{ --hex-size: clamp(120px, 44vw, 190px); }
-  .pearl{ max-height: 38vh; }
+  .pearl{ max-height: 100vh; }
 }
